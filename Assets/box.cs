@@ -10,7 +10,7 @@ public class box : MonoBehaviour {
 		
 		if (col.gameObject.tag == "Player" && Input.GetKeyDown(KeyCode.E)) {
 
-			Transform holder = col.gameObject.transform.FindChild("holder");
+			Transform holder = col.gameObject.transform.Find("holder");
 			transform.parent =  holder;
 			myRB.isKinematic = true;
 			segurando = true;

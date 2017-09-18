@@ -10,7 +10,7 @@ public class OrbRoxa : MonoBehaviour {
 
 		if ((col.gameObject.tag == "Player2" || col.gameObject.tag == "Player") && !segurando) {
 
-			Transform holder = col.gameObject.transform.FindChild("holder");
+			Transform holder = col.gameObject.transform.Find("holder");
 			transform.parent =  holder;
 			segurando = true;
 			transform.position = new Vector3(holder.position.x,holder.position.y,holder.position.z);
