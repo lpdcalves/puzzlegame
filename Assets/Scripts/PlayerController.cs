@@ -16,8 +16,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(Controller.jump) && (grounded))
+        if (Input.GetKeyDown(KeyCode.W) && (grounded))
         {
+            Debug.Log("W");
             animationPlayer.SetBool("jump", true);
             myRigidBody2D.AddForce(new Vector2(0, forcaPulo), ForceMode2D.Impulse);
             myRigidBody2D.gravityScale = 3;           
@@ -28,8 +29,9 @@ public class PlayerController : MonoBehaviour
             animationPlayer.SetBool("jump", false);
         }
         
-        if (Input.GetKey(Controller.walkLeft))
+        if (Input.GetKey(KeyCode.A))
         { //Se o A(Ele chama o script Controls que é estatico) for apertado ele vai ativar a animação de correr.
+            Debug.Log("A");
             animator.SetBool("walking", true);
             transform.Translate(new Vector3(-velocidade * Time.deltaTime, 0, 0));
 
@@ -39,8 +41,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        else if (Input.GetKey(Controller.walkRight))
+        else if (Input.GetKey(KeyCode.D))
         {
+            Debug.Log("D");
             animator.SetBool("walking", true);
             transform.Translate(new Vector3(velocidade * Time.deltaTime, 0, 0));
             if (!right)
@@ -49,10 +52,15 @@ public class PlayerController : MonoBehaviour
             }
         }
      
-          	else
+        else
 		{
-                animator.SetBool("walking", false);
-            }
+            animator.SetBool("walking", false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
       
 
     }
