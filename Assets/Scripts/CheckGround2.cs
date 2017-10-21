@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CheckGround2 : MonoBehaviour {
 
-
+    // mesma coisa do checkGround só que esse é para o player 2
     PlayerController2 playerController2;    
     void Awake()
     {
@@ -15,8 +15,6 @@ public class CheckGround2 : MonoBehaviour {
         if (other.gameObject.tag == "Jumpable")
         {           
             playerController2.grounded = true;
-
-          
            
         }
     }
@@ -25,8 +23,6 @@ public class CheckGround2 : MonoBehaviour {
         if (other.gameObject.tag == "Jumpable")
         {
            playerController2.grounded = false;
-
-     
         }
     }
 }

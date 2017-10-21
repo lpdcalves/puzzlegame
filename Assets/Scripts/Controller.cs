@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//isso aqui é pro jogador poder mudar as keybinds, mas ainda não tá funcionando
+
 public class Controller : MonoBehaviour {
 
     public static KeyCode walkLeft = KeyCode.A;
