@@ -5,7 +5,7 @@ public class PlayerController2 : MonoBehaviour {
 
     //declara atributos importantes para a movimentação do player2
     private bool right = true;
-    public float velocidade = 1f;
+    public float velocidade = 3;
     public Rigidbody2D myRigidBody2D;
     public Animator animator;
     public float forcaPulo;
@@ -18,25 +18,40 @@ public class PlayerController2 : MonoBehaviour {
 
 	void Start () {
 
-		Physics2D.IgnoreCollision (GetComponent<BoxCollider2D> (), boxCollider);
-	}
+        boxCollider = gameObject.GetComponent<BoxCollider2D>();
+    }
 
     void Update()
     {
-		Physics2D.IgnoreCollision (GetComponent<BoxCollider2D> (), boxCollider);
 
-        //se o jogador apertar a tecla W e o personagem estiver num chão pulável dá play na animação e faz ele pular
+        //se o jogador apertar a seta para cima e o personagem estiver num chão pulável dá play na animação e faz ele pular
         if (Input.GetKeyDown(KeyCode.UpArrow) && (grounded))
         {
 
             myRigidBody2D.AddForce(new Vector2(0, forcaPulo), ForceMode2D.Impulse);
-            myRigidBody2D.gravityScale = 3;
+            //myRigidBody2D.gravityScale = 3;
             animationPlayer2.SetBool("jump",true);
 
         }
         else
         {
             animationPlayer2.SetBool("jump", false); //garante que animação de pulo não vai estar ativa enquanto ele está no chão
+        }
+
+        //se o jogador apertar a seta para baixo e o personagem estiver num chão pulável dá play na animação e faz ele pular
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            boxCollider.offset = new Vector2(0, 0.01f);
+            boxCollider.size = new Vector2(0.07f, 0.07f);
+            velocidade = 1f;
+            animationPlayer2.SetBool("crouch", true);
+
+        }
+        else
+        {
+            boxCollider.offset = new Vector2(0, 0);
+            boxCollider.size = new Vector2(0.07f, 0.09f);
+            velocidade = 3f;
         }
 
         //anda para a esquerda se apertar a seta da esquerda

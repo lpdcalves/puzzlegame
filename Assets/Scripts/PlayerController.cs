@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerController : MonoBehaviour
 {
     //declara atributos importantes para a movimentação do player
-    private bool right=true;
+    private bool right = true;
     public float velocidade = 1f;
     public Rigidbody2D myRigidBody2D;
     public Animator animator;
@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
             //dá play na animação de pulo e gera uma força no objeto para cima (faz ele pular)
             animationPlayer.SetBool("jump", true);
             myRigidBody2D.AddForce(new Vector2(0, forcaPulo), ForceMode2D.Impulse);
-            myRigidBody2D.gravityScale = 3;           
+            //myRigidBody2D.gravityScale = 3;           
         }
 
         else
@@ -65,12 +65,8 @@ public class PlayerController : MonoBehaviour
 		{
             animator.SetBool("walking", false); //evita que a animação de andar esteja ativa com o boneco parado
         }
+    
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit(); // sai do jogo (só funciona no executável, substituir depois pelo menu)
-        }
-      
 
     }
 
