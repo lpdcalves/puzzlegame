@@ -6,7 +6,7 @@ public class CheckGround : MonoBehaviour {
     
     PlayerController playerController;
 
-    public string[] tagsPulaveis = { "Jumpable", "Box", };
+    public string[] tagsPulaveis = { "Jumpable", "Box", "plataforma", };
 
     void Awake()
     {

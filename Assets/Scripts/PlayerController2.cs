@@ -38,7 +38,7 @@ public class PlayerController2 : MonoBehaviour {
             animationPlayer2.SetBool("jump", false); //garante que animação de pulo não vai estar ativa enquanto ele está no chão
         }
 
-        //se o jogador apertar a seta para baixo e o personagem estiver num chão pulável dá play na animação e faz ele pular
+        //se o jogador apertar a seta para baixo, diminui o tamanho da caixa de colisão desse personagem, dá play na animação e diminuir sua velocidade
         if (Input.GetKey(KeyCode.DownArrow))
         {
             boxCollider.offset = new Vector2(0, 0.01f);
@@ -52,6 +52,7 @@ public class PlayerController2 : MonoBehaviour {
             boxCollider.offset = new Vector2(0, 0);
             boxCollider.size = new Vector2(0.07f, 0.09f);
             velocidade = 3f;
+            animationPlayer2.SetBool("crouch", false);
         }
 
         //anda para a esquerda se apertar a seta da esquerda

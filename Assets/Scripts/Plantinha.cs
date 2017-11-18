@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Plantinha : MonoBehaviour {
 
@@ -7,7 +8,9 @@ public class Plantinha : MonoBehaviour {
 
     //script da planta para pegar os orbs de água e luz e tornar filhos da planta para que eles fiquem flutuando em volta dela
 
-	void OnTriggerEnter2D (Collider2D col) {
+    float timer = 0.0f; // contador
+
+    void OnTriggerEnter2D (Collider2D col) {
 
 		if (col.tag == "Sol") {
 
@@ -26,4 +29,17 @@ public class Plantinha : MonoBehaviour {
 			
 		}
 	}
+
+    private void Update()
+    {
+        if (animator.GetBool("sol") && animator.GetBool("agua")) //verifica se as variaveis agua e sol que controlam a animação da planta são true
+        {
+            timer += Time.deltaTime; //inicia um contador
+
+            if (timer >= 5.0f) //se o contador for maior que 5 segundos
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); //carrega o proximo nível usando o index do nível atual + 1
+            }
+        }
+    }
 }

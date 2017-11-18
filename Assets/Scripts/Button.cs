@@ -3,12 +3,15 @@ using System.Collections;
 
 public class Button : MonoBehaviour {
 
-	public GameObject target; //variavel para possibilitar associar um objeto (porta, mola etc...) a esse script através do unity
-	public Animator targetAnimator; // variavel para pegar o Animator do nosso target
+	public GameObject target; //variável para possibilitar associar um objeto (porta, mola etc...) a esse script através do unity
+	public Animator targetAnimator; //variável para pegar o Animator do nosso target
 
 	private SpriteRenderer spriteRenderer;
 
-	public Sprite nonPressedButton; //pega os sprites (imagens) para quando o botão está e não está apertado
+    public bool MovesRight; //variável para saber se o meu botão move algum objeto para a direita
+    public bool Single = true; //variável para saber se o meu botão faz parte de um conjunto com outro botão ou se ele só aciona um objeto
+
+    public Sprite nonPressedButton; //pega os sprites (imagens) para quando o botão está e não está apertado
 	public Sprite pressedButton;
 
 	private string quemSubiu = ""; //variável para saber quem subiu no botão e só desativer quando esse alguem sair
@@ -59,5 +62,42 @@ public class Button : MonoBehaviour {
 			targetAnimator.SetBool("descendo", true); //aciona o bool responsável por acionar a animação de subir
             targetAnimator.SetBool("subindo", false);
         }
-	}
+
+        if (target.gameObject.tag == "plataforma" && key == 1 && !Single && MovesRight)
+        {
+            //faz mover plataforma para direita
+            target.GetComponent<Plataforma>().movingRight = true;
+        }
+
+        if (target.gameObject.tag == "plataforma" && key == 2 && !Single && MovesRight)
+        {
+            //faz parar de mover a plataforma
+            target.GetComponent<Plataforma>().movingRight = false;
+        }
+
+        if (target.gameObject.tag == "plataforma" && key == 1 && !Single && !MovesRight)
+        {
+            //faz mover plataforma para direita
+            target.GetComponent<Plataforma>().movingLeft = true;
+        }
+
+        if (target.gameObject.tag == "plataforma" && key == 2 && !Single && !MovesRight)
+        {
+            //faz parar de mover a plataforma
+            target.GetComponent<Plataforma>().movingLeft = false;
+        }
+
+        if (target.gameObject.tag == "placa" && key == 1)
+        {
+            //faz açao numero 1 da placa (abrir)
+
+            targetAnimator.SetBool("hiding", false); //aciona o bool responsável por acionar a animação de abrir
+        }
+
+        if (target.gameObject.tag == "placa" && key == 2)
+        {
+            //faz açao numero 2 da placa (fechar)
+            targetAnimator.SetBool("hiding", true); //aciona o bool responsável por acionar a animação de fechar
+        }
+    }
 }

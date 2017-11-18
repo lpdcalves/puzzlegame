@@ -11,6 +11,8 @@
         public float lookAheadFactor = 3;
         public float lookAheadReturnSpeed = 0.5f;
         public float lookAheadMoveThreshold = 0.1f;
+        public float lookAheadMaxDistance = 2f;
+        public float lookAheadZoomSpeed = 0.01f;
         public float yPosRestriction = -1f; //restrição de posição no eixo y
         public float yPosRestrictionUp = 8;
         public float xPlusRestrict = 25f; //restrição de posição no eixo x
@@ -42,26 +44,28 @@
 
         }
 
-        // Função padrão do unity que é chamada a cada frame
-        private void Update()
+        // Função padrão do unity que é chamada após o update padrão, ou seja, a camera não vai ficar tendo espasmos
+        // porque qualquer movimento do player já terá sido feito antes dessa função ser chamada
+        private void FixedUpdate()
 	    {
 		// acha os parametros de distancia do centro da tela até a borda
 		float top = Camera.main.ScreenToWorldPoint (new Vector3 (0f, Screen.height)).y;
 		float bottom = Camera.main.ScreenToWorldPoint (new Vector3 (0f, 0f)).y;
 		float right = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, 0f)).x;
 		float left = Camera.main.ScreenToWorldPoint (new Vector3 (0f, 0f)).x;
-        //if para verificar se um dos personagens saiu do campo de visão da câmera
-		if (target1.position.x > right || target1.position.x < left || target1.position.y > top || target1.position.y < bottom || target2.position.x > right || target2.position.x < left || target2.position.y > top || target2.position.y < bottom) {
+
+        //if para verificar se um dos personagens está chegando perto do limite externo da câmera
+		if (target1.position.x > (right - lookAheadMaxDistance) || target1.position.x < (left + lookAheadMaxDistance) || target1.position.y > (top - lookAheadMaxDistance) || target1.position.y < (bottom + lookAheadMaxDistance) || target2.position.x > (right - lookAheadMaxDistance) || target2.position.x < (left + lookAheadMaxDistance) || target2.position.y > (top - lookAheadMaxDistance) || target2.position.y < (bottom + lookAheadMaxDistance)) {
             //if para fazer a camera dar um zoom out
-			if (Camera.main.orthographicSize < 5f) {
-				Camera.main.orthographicSize += 0.01f;
+			if (Camera.main.orthographicSize < 6f) {
+				Camera.main.orthographicSize += lookAheadZoomSpeed;
 			}
 		}
         // para verificar se um dos personagens está se aproximando do centro da câmera
-        if (target1.position.x < right - 2 && target1.position.x > left + 2 && target1.position.y < top - 2 && target1.position.y > bottom + 2 && target2.position.x < right - 2 && target2.position.x > left + 2 && target2.position.y < top - 2 && target2.position.y > bottom + 2 ) {
+        if (target1.position.x < right - lookAheadMaxDistance && target1.position.x > left + lookAheadMaxDistance && target1.position.y < top - lookAheadMaxDistance && target1.position.y > bottom + lookAheadMaxDistance && target2.position.x < right - lookAheadMaxDistance && target2.position.x > left + lookAheadMaxDistance && target2.position.y < top - lookAheadMaxDistance && target2.position.y > bottom + lookAheadMaxDistance) {
             //if para fazer a camera dar um zoom in
 			if (Camera.main.orthographicSize > 2.5f) {
-				Camera.main.orthographicSize -= 0.01f;
+				Camera.main.orthographicSize -= lookAheadZoomSpeed;
 			}
 		}
             //declara os valores de posição do alvo imaginário

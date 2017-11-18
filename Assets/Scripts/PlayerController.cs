@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
             //dá play na animação de pulo e gera uma força no objeto para cima (faz ele pular)
             animationPlayer.SetBool("jump", true);
             myRigidBody2D.AddForce(new Vector2(0, forcaPulo), ForceMode2D.Impulse);
-            //myRigidBody2D.gravityScale = 3;           
+            //myRigidBody2D.gravityScale = 3;
         }
 
         else

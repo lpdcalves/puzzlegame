@@ -7,7 +7,7 @@ public class CheckGround2 : MonoBehaviour {
     // mesma coisa do checkGround só que esse é para o player 2
     PlayerController2 playerController2;
 
-    public string[] tagsPulaveis = { "Jumpable", "Box", };
+    public string[] tagsPulaveis = { "Jumpable", "Box", "plataforma", };
 
     void Awake()
     {
