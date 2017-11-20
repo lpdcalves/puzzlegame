@@ -7,8 +7,17 @@ public class OrbRoxa : MonoBehaviour {
 
 	bool segurando = false;
 	string quemTaSegurando = "";
+    public Transform holder;
+    private BoxCollider2D col;
+    //private SpriteRenderer renderer;
 
-	void OnTriggerEnter2D (Collider2D col) {
+    private void Start()
+    {
+        col = gameObject.GetComponent<BoxCollider2D>();
+        //renderer = gameObject.GetComponent<SpriteRenderer>();
+    }
+
+    void OnTriggerEnter2D (Collider2D col) {
 
         //verifica se não tem ninguem segurando a orb, se não tiver ele coloca ela como filha do Holder do player 
         //O holder é um objeto invisível que fica flutuando na frente do player. Só serve para dar posição de onde as orbs/caixas vão ficar
@@ -41,6 +50,23 @@ public class OrbRoxa : MonoBehaviour {
 				this.transform.parent = null;
 				segurando = false;
 			}
-		}
-	}
+		}        
+
+        if (holder)
+        {
+            if (holder.tag == "placa" && (holder.GetComponent<Animator>().GetBool("hiding") == true))
+            {
+                col.enabled = false;
+                //renderer.enabled = false;
+                Debug.Log("false");
+            }
+
+            if (holder.tag == "placa" && (holder.GetComponent<Animator>().GetBool("hiding") == false))
+            {
+                col.enabled = true;
+                //renderer.enabled = true;
+                Debug.Log("true");
+            }
+        }
+    }
 }

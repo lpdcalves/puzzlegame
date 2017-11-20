@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlacaMadeira : MonoBehaviour {
-
-    public GameObject target; //alvo vai ser um orbe roxo
+    
     public bool hiding = true; //variavel que é igual a variavel hiding do animator
 
     // Use this for initialization
@@ -18,14 +17,5 @@ public class PlacaMadeira : MonoBehaviour {
 
         hiding = gameObject.GetComponent<Animator>().GetBool("hiding");
 
-        //se hiding = true (a placa estiver escondendo o orbe roxo) desabilita o objeto do orbe roxo
-        if (hiding)
-        {
-            target.SetActive(false);
-        }
-        else
-        {
-            target.SetActive(true);
-        }
 	}
 }

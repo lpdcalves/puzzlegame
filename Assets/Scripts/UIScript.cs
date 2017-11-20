@@ -15,7 +15,6 @@ public class UIScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Debug.Log(SceneManager.GetActiveScene().name);
         if ((SceneManager.GetActiveScene().buildIndex != 0) || (SceneManager.GetActiveScene().name != "Credits"))
         {
             Scene cena = SceneManager.GetActiveScene();
@@ -85,6 +84,11 @@ public class UIScript : MonoBehaviour {
     public void menu()
     {
         SceneManager.LoadScene("Menu");
+        Time.timeScale = 1;
+    }
+    public void tutorial()
+    {
+        SceneManager.LoadScene("Tutorial");
         Time.timeScale = 1;
     }
     public void fase1()
